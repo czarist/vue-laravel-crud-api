@@ -11,6 +11,9 @@ const router = createRouter({
 });
 
 const app = createApp(App);
+
 app.use(router);
 app.use(VueAxios, axios);
 app.mount('#app');
+
+export const API_URL = 'http://localhost:8000/api';

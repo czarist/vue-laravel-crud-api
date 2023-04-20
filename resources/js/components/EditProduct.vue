@@ -30,6 +30,8 @@
 </template>
  
 <script>
+import { API_URL } from '../app.js';
+
 export default {
     data() {
         return {
@@ -39,12 +41,12 @@ export default {
     },
     created() {
         this.axios
-            .get(`http://localhost:8000/api/products/${this.$route.params.id}`)
+            .get(`${API_URL}/products/${this.$route.params.id}`)
             .then((res) => {
                 this.product = res.data;
             });
         this.axios
-            .get('http://localhost:8000/api/categories/')
+            .get(`${API_URL}/categories/`)
             .then(response => {
                 this.categories = response.data;
             });
@@ -52,9 +54,13 @@ export default {
     methods: {
         updateProduct() {
             this.axios
-                .patch(`http://localhost:8000/api/products/${this.$route.params.id}`, this.product)
+                .patch(`${API_URL}/products/${this.$route.params.id}`, this.product)
                 .then((res) => {
                     this.$router.push({ name: 'home' });
+                    alert("Product updated successfully.");
+                })
+                .catch((error) => {
+                    alert("Error updating product: " + error.response.data.message);
                 });
         }
     }

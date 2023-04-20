@@ -16,7 +16,7 @@
                     <td>{{ category.name }}</td>
                     <td>
                         <div class="btn-group" role="group">
-                            <router-link :to="{ name: 'edit', params: { id: category.id } }"
+                            <router-link :to="{ name: 'edit_category', params: { id: category.id } }"
                                 class="btn btn-success">Edit</router-link>
                             <button class="btn btn-danger" @click="deleteCategory(category.id)">Delete</button>
                         </div>
@@ -28,6 +28,8 @@
 </template>
  
 <script>
+import { API_URL } from '../app.js';
+
 export default {
     data() {
         return {
@@ -36,7 +38,7 @@ export default {
     },
     created() {
         this.axios
-            .get('http://localhost:8000/api/categories/')
+            .get(`${API_URL}/categories/`)
             .then(response => {
                 this.categories = response.data;
             });
@@ -44,7 +46,7 @@ export default {
     methods: {
         deleteCategory(id) {
             this.axios
-                .delete(`http://localhost:8000/api/categories/${id}`)
+                .delete(`${API_URL}/categories/${id}`)
                 .then(response => {
                     let i = this.categories.map(data => data.id).indexOf(id);
                     this.categories.splice(i, 1);

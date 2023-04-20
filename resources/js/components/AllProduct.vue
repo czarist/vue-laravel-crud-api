@@ -38,6 +38,8 @@
 </template>
  
 <script>
+import { API_URL } from '../app.js';
+
 export default {
     data() {
         return {
@@ -47,12 +49,12 @@ export default {
     },
     created() {
         this.axios
-            .get('http://localhost:8000/api/products/')
+            .get(`${API_URL}/products/`)
             .then(response => {
                 this.products = response.data;
             });
         this.axios
-            .get('http://localhost:8000/api/categories/')
+            .get(`${API_URL}/categories/`)
             .then(response => {
                 this.categories = response.data;
             });
@@ -60,7 +62,7 @@ export default {
     methods: {
         deleteProduct(id) {
             this.axios
-                .delete(`http://localhost:8000/api/products/${id}`)
+                .delete(`${API_URL}/products/${id}`)
                 .then(response => {
                     let i = this.products.map(data => data.id).indexOf(id);
                     this.products.splice(i, 1);

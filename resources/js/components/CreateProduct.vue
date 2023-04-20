@@ -30,6 +30,8 @@
 </template>
  
 <script>
+import { API_URL } from '../app.js';
+
 export default {
     data() {
         return {
@@ -39,7 +41,7 @@ export default {
     },
     created() {
         this.axios
-            .get('http://localhost:8000/api/categories/')
+            .get(`${API_URL}/categories/`)
             .then(response => {
                 this.categories = response.data;
             });
@@ -47,7 +49,7 @@ export default {
     methods: {
         addProduct() {
             this.axios
-                .post('http://localhost:8000/api/products', this.product)
+                .post(`${API_URL}/products`, this.product)
                 .then(response => (
                     this.$router.push({ name: 'home' })
                 ))
