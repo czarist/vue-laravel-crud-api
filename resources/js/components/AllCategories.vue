@@ -30,9 +30,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Confirm Deletion</h5>
-                    <button type="button" class="close" @click="hideModal">
-                        <span>&times;</span>
-                    </button>
+                    <span class="close" @click="hideModal">&times;</span>
                 </div>
                 <div class="modal-body">
                     <p>Do you really want to delete this category?</p>
