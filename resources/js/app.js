@@ -4,6 +4,7 @@ import VueAxios from 'vue-axios';
 import axios from 'axios';
 import { createRouter, createWebHistory } from 'vue-router';
 import { routes } from './routes';
+import "../css/app.css";
 
 export const API_URL = 'http://localhost:8000/api';
 
