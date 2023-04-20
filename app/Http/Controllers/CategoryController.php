@@ -61,11 +61,19 @@ class CategoryController extends Controller
 
     public function destroy(int $id): \Illuminate\Http\JsonResponse
     {
-        $category = Category::find($id);
-        if (!$category) {
-            return response()->json(['message' => 'Category not found'], 404);
+        try {
+            $category = Category::find($id);
+            if (!$category) {
+                return response()->json(['message' => 'Category not found'], 404);
+            }
+            $category->delete();
+            return response()->json(['message' => 'Category deleted!']);
+        } catch (\Illuminate\Database\QueryException $ex) {
+            $errorCode = $ex->errorInfo[1];
+            if ($errorCode == 1451) {
+                return response()->json(['message' => 'Cannot delete category. It is being used by some product.'], 400);
+            }
+            return response()->json(['message' => 'Something went wrong.'], 500);
         }
-        $category->delete();
-        return response()->json('Category deleted!');
     }
 }

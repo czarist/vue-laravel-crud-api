@@ -23,6 +23,7 @@ class ProductController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required',
             'detail' => 'required',
+            'price' => 'required',
             'category_id' => 'required'
         ]);
         if ($validator->fails()) {
@@ -31,6 +32,7 @@ class ProductController extends Controller
         $product = new Product([
             'name' => $request->input('name'),
             'detail' => $request->input('detail'),
+            'price' => $request->input('price'),
             'category_id' => $request->input('category_id')
         ]);
         $product->save();
@@ -51,6 +53,7 @@ class ProductController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required',
             'detail' => 'required',
+            'price' => 'required',
             'category_id' => 'required'
         ]);
         if ($validator->fails()) {
@@ -63,6 +66,7 @@ class ProductController extends Controller
         $product->update([
             'name' => $request->input('name'),
             'detail' => $request->input('detail'),
+            'price' => $request->input('price'),
             'category_id' => $request->input('category_id')
         ]);
         return response()->json('Product updated!');

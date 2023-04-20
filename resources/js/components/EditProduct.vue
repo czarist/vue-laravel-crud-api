@@ -12,7 +12,17 @@
                         <label>Detail</label>
                         <input type="text" class="form-control" v-model="product.detail">
                     </div>
-                    <button type="submit" class="btn btn-primary">Update</button>
+                    <div class="form-group">
+                        <label>Price</label>
+                        <input type="number" class="form-control" v-model="product.price" step="0.01" min="0">
+                    </div>
+                    <div class="form-group">
+                        <label>Category</label>
+                        <select class="form-control" v-model="product.category_id">
+                            <option v-for="category in categories" :value="category.id">{{ category.name }}</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary mt-5">Update</button>
                 </form>
             </div>
         </div>
@@ -23,7 +33,8 @@
 export default {
     data() {
         return {
-            product: {}
+            product: {},
+            categories: []
         }
     },
     created() {
@@ -31,6 +42,11 @@ export default {
             .get(`http://localhost:8000/api/products/${this.$route.params.id}`)
             .then((res) => {
                 this.product = res.data;
+            });
+        this.axios
+            .get('http://localhost:8000/api/categories/')
+            .then(response => {
+                this.categories = response.data;
             });
     },
     methods: {

@@ -1,6 +1,7 @@
 import AllProduct from './components/AllProduct.vue';
 import CreateProduct from './components/CreateProduct.vue';
 import EditProduct from './components/EditProduct.vue';
+import AllCategories from './components/AllCategories.vue';
 
 export const routes = [
     {
@@ -17,5 +18,10 @@ export const routes = [
         name: 'edit',
         path: '/edit/:id',
         component: EditProduct
+    },
+    {
+        name: 'Categories',
+        path: '/categories',
+        component: AllCategories 
     }
 ];
