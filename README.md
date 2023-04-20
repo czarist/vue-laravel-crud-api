@@ -32,6 +32,8 @@
     
     6. run/rode php artisan key:generate
 
-    7. run/rode npm install 
+    7. run/rode php artisan serve
+
+    8. run/rode npm install 
        
-    8. run/rode npm run watch 
+    9. run/rode npm run watch 
