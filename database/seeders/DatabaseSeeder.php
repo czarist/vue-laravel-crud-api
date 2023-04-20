@@ -1,9 +1,10 @@
 <?php
 
-namespace Database\Seeders;
-
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\Category;
+use App\Database\Seeders\CategoriesTableSeeder;
+use App\Database\Seeders\ProductsTableSeeder;
+use Illuminate\Support\Facades\DB;
 
 class DatabaseSeeder extends Seeder
 {
@@ -14,11 +15,30 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        // Array com as possíveis categorias
+        $categories = ['Tecnologia', 'Esportes', 'Música', 'Culinária', 'Moda', 'Viagem', 'Arte', 'Filmes', 'Livros', 'Jogos'];
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        // Gerando 20 categorias aleatórias
+        for ($i = 1; $i <= 20; $i++) {
+            $category = [
+                'name' => $categories[array_rand($categories)] . " - " . $i,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ];
+            DB::table('categories')->insert($category);
+        }
+
+        $categoriesList = DB::table('categories')->pluck('id');
+
+        for ($i = 1; $i <= 20; $i++) {
+            DB::table('products')->insert([
+                'name' => 'Product ' . $i,
+                'detail' => 'Detail for Product ' . $i,
+                'price' => rand(10, 100),
+                'category_id' => $categoriesList->random(),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+        }
     }
 }
